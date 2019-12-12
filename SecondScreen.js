@@ -1,15 +1,30 @@
 import React from 'react';  
-import { StyleSheet, View, Text, Button } from 'react-native';  
+import { StyleSheet, View, Text, Button, AsyncStorage} from 'react-native';  
   
-export default class SecondScreen extends React.Component {  
+export default class SecondScreen extends React.Component { 
+
+    
+    
+    displayData = async ()=>{  
+        try{  
+          let count1 = await AsyncStorage.getItem('count');
+          console.log(count1)
+          alert(count1)
+        }  
+        catch(error){  
+          alert(error)  
+        }  
+      }  
+
     render() {  
     
         const { navigation } = this.props;  
-        const count1 = navigation.getParam('count', 'counter');  
+        this.displayData();  
+       
           
         return (  
             <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>    
-                <Text style={styles.textStyle}>Times Visited:{count1}</Text>  
+                <Text style={styles.textStyle}>{this.count1}</Text>  
                    <View style={styles.buttonStyle}>  
                 <Button  
                     title="Go back"  
@@ -32,3 +47,21 @@ const styles = StyleSheet.create({
         marginTop: 100,   
     }  
 });  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
